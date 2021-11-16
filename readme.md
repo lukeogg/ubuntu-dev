@@ -1,8 +1,7 @@
 # Create an ubuntu machine for dev in aws 
 
 ## Prerequisites 
-Requires Terraform v0.13.7.
-
+Requires Terraform v0.13.7. Use (tfenv)[https://github.com/tfutils/tfenv] for installation.
 
 ## Creation
 Edit the `terraform.tfvars` file and adjust owner and instance_type values.
