@@ -5,10 +5,10 @@ resource "aws_instance" "my-machine" {          # This is Resource block where w
   tags = {
     owner = var.owner
     AWS_EXPIRATION = var.expiration
-    map(
-      "Name", "${local.cluster_name}-bastion-${count.index}",
-      "konvoy/nodeRoles", "bastion"
-    )
+    # map(
+    #   "Name", "${local.cluster_name}-bastion-${count.index}",
+    #   "konvoy/nodeRoles", "bastion"
+    # )
   }
   key_name = "deployer-key"
   vpc_security_group_ids = [aws_security_group.main.id]
