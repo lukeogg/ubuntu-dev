@@ -5,6 +5,8 @@ Requires Terraform v0.13.7.
 
 
 ## Creation
+Edit the `terraform.tfvars` file and adjust owner and instance_type values.
+
 To install apply the terraform files. This will generate a key pair and create the machine.
 
 ``` shell
