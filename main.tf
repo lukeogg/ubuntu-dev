@@ -8,6 +8,7 @@ locals {
 resource "aws_instance" "ubuntu-dev-machine" {
   ami = var.ami
   instance_type = var.instance_type
+  availability_zone = "us-west-2c"
   tags = {
     owner = var.owner
     expiration = var.expiration
