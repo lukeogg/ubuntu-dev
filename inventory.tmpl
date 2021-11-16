@@ -1,0 +1,8 @@
+[servers]
+%{ for index, dns in private-dns ~}
+${dns} 
+ansible_host=${private-ip[index]} # 
+${private-id
+
+[index]}
+%{ endfor ~}
