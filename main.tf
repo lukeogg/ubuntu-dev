@@ -17,10 +17,11 @@ resource "aws_instance" "ubuntu-dev-machine" {
   vpc_security_group_ids = [aws_security_group.main.id]
 
   # use this to increase the ebs volume size
-  # ebs_block_device {
-  #   device_name = "/dev/sda1"
-  #   volume_size = 20
-  # }
+  ebs_block_device {
+    device_name = "/dev/sda1"
+    volume_size =  var.base_volume_size
+    
+  }
 
   # connection {
   #   type        = "ssh"

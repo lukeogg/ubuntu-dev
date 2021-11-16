@@ -21,6 +21,11 @@ variable "volume_type" {
   default     = "gp2"
 }
 
+variable "base_volume_size" {
+  description = "The size for the dedicated volume"
+  default     = "250"
+}
+
 variable "volume_size" {
   description = "The size for the dedicated volume"
   default     = "160"
