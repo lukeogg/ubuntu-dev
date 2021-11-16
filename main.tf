@@ -1,16 +1,19 @@
-resource "aws_instance" "my-machine" {          # This is Resource block where we define what we need to create
+resource "random_pet" "name" {}
 
-  ami = var.ami                                 # ami is required as we need ami in order to create an instance
-  instance_type = var.instance_type             # Similarly we need instance_type
+locals {
+  machine_name = "${var.owner}-${random_pet.name.id}-dev-machine"
+  generated_key_name = "${var.owner}-${random_pet.name.id}-dev-key-pair"
+}
+
+resource "aws_instance" "ubuntu-dev-machine" {
+  ami = var.ami
+  instance_type = var.instance_type
   tags = {
     owner = var.owner
-    AWS_EXPIRATION = var.expiration
-    # map(
-    #   "Name", "${local.cluster_name}-bastion-${count.index}",
-    #   "konvoy/nodeRoles", "bastion"
-    # )
+    expiration = var.expiration
+    Name = local.machine_name
   }
-  key_name = "deployer-key"
+  key_name = local.generated_key_name
   vpc_security_group_ids = [aws_security_group.main.id]
 
   # connection {
@@ -23,6 +26,8 @@ resource "aws_instance" "my-machine" {          # This is Resource block where w
 }
 
 resource "aws_security_group" "main" {
+  name = "${local.machine_name}-sg"
+  description = "Allow inbound SSH to manage machine"
   egress = [
     {
       cidr_blocks      = [ "0.0.0.0/0", ]
@@ -51,8 +56,19 @@ resource "aws_security_group" "main" {
   ]
 }
 
+resource "tls_private_key" "dev_key" {
+  algorithm = "RSA"
+  rsa_bits  = 4096
+}
 
-resource "aws_key_pair" "deployer" {
-  key_name   = "deployer-key"
-  public_key = ""
+resource "aws_key_pair" "generated_key" {
+  key_name   = local.generated_key_name
+  public_key = tls_private_key.dev_key.public_key_openssh
+
+  provisioner "local-exec" {    # Generate "terraform-key-pair.pem" in current directory
+    command = <<-EOT
+      echo '${tls_private_key.dev_key.private_key_pem}' > ./'${local.generated_key_name}'.pem
+      chmod 400 ./'${local.generated_key_name}'.pem
+    EOT
+  }
 }

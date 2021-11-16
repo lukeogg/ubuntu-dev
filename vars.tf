@@ -1,8 +1,8 @@
-variable "ami" {                       # We are declaring the variable ami here which we used in main.tf
+variable "ami" {
   type = string      
 }
 
-variable "instance_type" {             # We are declaring the variable instance_type here which we used in main.tf
+variable "instance_type" {
   type = string 
 }
 
@@ -12,5 +12,6 @@ variable "owner" {
 
 variable "expiration" {
   type = string
-  default = "1h"
+  default = "8h"
+  description = "Time before cloudkeeper cleans up resources"
 }
