@@ -16,6 +16,12 @@ resource "aws_instance" "ubuntu-dev-machine" {
   key_name = local.generated_key_name
   vpc_security_group_ids = [aws_security_group.main.id]
 
+  # use this to increase the ebs volume size
+  # ebs_block_device {
+  #   device_name = "/dev/sda1"
+  #   volume_size = 20
+  # }
+
   # connection {
   #   type        = "ssh"
   #   host        = self.public_ip
@@ -23,6 +29,30 @@ resource "aws_instance" "ubuntu-dev-machine" {
   #   private_key = file("/home/rahul/Jhooq/keys/aws/aws_key")
   #   timeout     = "4m"
   # }
+}
+
+resource "aws_ebs_volume" "ubuntu-dev-machine-volume" {
+  #count             = var.control_plane_imagefs_volume_enabled ? var.control_plane_count : 0
+  availability_zone = "us-west-2c"
+  type              = var.volume_type
+  size              = var.volume_size
+
+  #encrypted  = var.control_plane_kms_key_id != "" ? true : false
+  #kms_key_id = var.control_plane_kms_key_id
+
+  tags = {
+    owner = var.owner
+    expiration = var.expiration
+    Name = "${local.machine_name}-volume"
+  }
+}
+
+resource "aws_volume_attachment" "control_plane_imagefs" {
+  #count        = var.control_plane_imagefs_volume_enabled ? var.control_plane_count : 0
+  device_name  = "/dev/${var.volume_device}"
+  volume_id    = aws_ebs_volume.ubuntu-dev-machine-volume.id
+  instance_id  = aws_instance.ubuntu-dev-machine.id
+  force_detach = true
 }
 
 resource "aws_security_group" "main" {
@@ -76,12 +106,10 @@ resource "aws_key_pair" "generated_key" {
 ### The Ansible inventory 
 resource "local_file" "AnsibleInventory" {
   content = templatefile("inventory.tmpl", {
-#      bastion-dns = aws_eip.eip-bastion.public_dns,  
-#      bastion-ip = aws_eip.eip-bastion.public_ip,  
-#      bastion-id = aws_instance.bastion.id,  
       private-dns = aws_instance.ubuntu-dev-machine.*.public_dns,  
       private-ip = aws_instance.ubuntu-dev-machine.*.public_ip,  
       private-id = aws_instance.ubuntu-dev-machine.*.id 
+      key-file-path = "${local.generated_key_name}.pem"
       }
   )
   filename = "inventory"
