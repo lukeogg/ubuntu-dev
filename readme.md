@@ -14,3 +14,12 @@ terraform apply
 ```
 
 The command will output the public dns of the machine as well as an SSH connection string. It is recommended to use tmux to prevent commands from failing due to connection.
+
+## Multiple Workspaces
+You can create multiple machines this way:
+
+```
+$ terraform workspace new dev-machine2
+$ terraform init
+$ terraform apply
+```
