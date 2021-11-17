@@ -1,0 +1,73 @@
+---
+
+  - hosts: servers
+    name: "Setup dev tools"
+    tasks:
+
+    # - name: "run setenforce to 0"
+    #   command: "setenforce 0"
+    #   become: yes
+
+    - name: "remove Docker packages"
+      apt:
+        name:
+          - docker
+          - docker-client
+          - docker-client-latest
+          - docker-common
+          - docker-latest
+          - docker-latest-logrotate
+          - docker-logrotate
+          - docker-engine
+        state: absent
+      become: yes
+
+    # - name: "add epel repo"
+    #   yum:
+    #     name: epel-release
+    #     state: present
+    #   become: yes
+
+    - name: "install utils"
+      apt:
+        name:
+          - yum-utils
+          - bzip2
+          - pbzip2
+          - httpd-tools
+          - python3
+        state: present
+      become: yes
+
+    - name: "add Docker repository"
+      yum_repository:
+        name: Docker
+        description: "Docker Repository"
+        baseurl: https://download.docker.com/linux/centos/7/x86_64/stable
+        enabled: yes
+        gpgcheck: no
+      become: yes
+
+    - name: "install Docker packages"
+      apt:
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+        state: present
+      become: yes
+
+    - name: "add Kubernetes repository"
+      yum_repository:
+        name: Kubernetes
+        description: "Kubernetes Repository"
+        baseurl: https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+        enabled: yes
+        gpgcheck: no
+      become: yes
+
+    - name: "install kubectl"
+      apt:
+        name: kubectl-1.18.10
+        state: present
+      become: yes
