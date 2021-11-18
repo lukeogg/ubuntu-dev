@@ -11,5 +11,5 @@ output "public_dns" {
 }
 
 output "connections" {
-  value = "ssh -i ./'${local.generated_key_name}'.pem ubuntu@${aws_instance.ubuntu-dev-machine.public_dns}"
+  value = "ssh -i ${local.generated_key_name}.pem ubuntu@${aws_instance.ubuntu-dev-machine.public_dns}"
 }
