@@ -34,29 +34,29 @@ resource "aws_instance" "ubuntu-dev-machine" {
   # }
 }
 
-resource "aws_ebs_volume" "ubuntu-dev-machine-volume" {
-  #count             = var.control_plane_imagefs_volume_enabled ? var.control_plane_count : 0
-  availability_zone = "us-west-2c"
-  type              = var.volume_type
-  size              = var.volume_size
+# resource "aws_ebs_volume" "ubuntu-dev-machine-volume" {
+#   #count             = var.control_plane_imagefs_volume_enabled ? var.control_plane_count : 0
+#   availability_zone = "us-west-2c"
+#   type              = var.volume_type
+#   size              = var.volume_size
 
-  #encrypted  = var.control_plane_kms_key_id != "" ? true : false
-  #kms_key_id = var.control_plane_kms_key_id
+#   #encrypted  = var.control_plane_kms_key_id != "" ? true : false
+#   #kms_key_id = var.control_plane_kms_key_id
 
-  tags = {
-    owner = var.owner
-    expiration = var.expiration
-    Name = "${local.machine_name}-volume"
-  }
-}
+#   tags = {
+#     owner = var.owner
+#     expiration = var.expiration
+#     Name = "${local.machine_name}-volume"
+#   }
+# }
 
-resource "aws_volume_attachment" "control_plane_imagefs" {
-  #count        = var.control_plane_imagefs_volume_enabled ? var.control_plane_count : 0
-  device_name  = "/dev/${var.volume_device}"
-  volume_id    = aws_ebs_volume.ubuntu-dev-machine-volume.id
-  instance_id  = aws_instance.ubuntu-dev-machine.id
-  force_detach = true
-}
+# resource "aws_volume_attachment" "control_plane_imagefs" {
+#   #count        = var.control_plane_imagefs_volume_enabled ? var.control_plane_count : 0
+#   device_name  = "/dev/${var.volume_device}"
+#   volume_id    = aws_ebs_volume.ubuntu-dev-machine-volume.id
+#   instance_id  = aws_instance.ubuntu-dev-machine.id
+#   force_detach = true
+# }
 
 resource "aws_security_group" "main" {
   name = "${local.machine_name}-sg"

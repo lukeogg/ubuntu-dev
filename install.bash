@@ -77,66 +77,66 @@ EOF
   systemctl enable docker
 }
 
-function installTeamCityAgent {(
-  mkdir /opt/teamcity-agent
-  cd /opt/teamcity-agent
-  _wget https://teamcity.mesosphere.io/update/buildAgent.zip
-  unzip buildAgent.zip
-  rm buildAgent.zip
+# function installTeamCityAgent {(
+#   mkdir /opt/teamcity-agent
+#   cd /opt/teamcity-agent
+#   _wget https://teamcity.mesosphere.io/update/buildAgent.zip
+#   unzip buildAgent.zip
+#   rm buildAgent.zip
 
-  mkdir /teamcity
-  sed 's/^serverUrl=.*/serverUrl=https:\/\/teamcity.mesosphere.io/' /opt/teamcity-agent/conf/buildAgent.dist.properties > /opt/teamcity-agent/conf/buildAgent.properties
-  sed -i 's#^workDir=.*#workDir=/teamcity/work#' /opt/teamcity-agent/conf/buildAgent.properties
-  sed -i 's#^tempDir=.*#tempDir=/teamcity/temp#' /opt/teamcity-agent/conf/buildAgent.properties
-  sed -i 's#^systemDir=.*#systemDir=/teamcity/system#' /opt/teamcity-agent/conf/buildAgent.properties
+#   mkdir /teamcity
+#   sed 's/^serverUrl=.*/serverUrl=https:\/\/teamcity.mesosphere.io/' /opt/teamcity-agent/conf/buildAgent.dist.properties > /opt/teamcity-agent/conf/buildAgent.properties
+#   sed -i 's#^workDir=.*#workDir=/teamcity/work#' /opt/teamcity-agent/conf/buildAgent.properties
+#   sed -i 's#^tempDir=.*#tempDir=/teamcity/temp#' /opt/teamcity-agent/conf/buildAgent.properties
+#   sed -i 's#^systemDir=.*#systemDir=/teamcity/system#' /opt/teamcity-agent/conf/buildAgent.properties
 
-  echo '' >> /opt/teamcity-agent/conf/buildAgent.properties
-  echo -E "etc.issue=$(cat /etc/issue | tr '\n' ' ')" >> /opt/teamcity-agent/conf/buildAgent.properties
-  chmod ug+x /opt/teamcity-agent/bin/*.sh
+#   echo '' >> /opt/teamcity-agent/conf/buildAgent.properties
+#   echo -E "etc.issue=$(cat /etc/issue | tr '\n' ' ')" >> /opt/teamcity-agent/conf/buildAgent.properties
+#   chmod ug+x /opt/teamcity-agent/bin/*.sh
 
-  cat > /etc/systemd/system/teamcity-agent.service <<EOF
-[Unit]
-Description=TeamCity Agent
-After=network.target
-[Service]
-ExecStart=/opt/teamcity-agent/bin/agent.sh run
-Restart=always
-RestartSec=15
-StartLimitInterval=0
-[Install]
-WantedBy=multi-user.target
-EOF
+#   cat > /etc/systemd/system/teamcity-agent.service <<EOF
+# [Unit]
+# Description=TeamCity Agent
+# After=network.target
+# [Service]
+# ExecStart=/opt/teamcity-agent/bin/agent.sh run
+# Restart=always
+# RestartSec=15
+# StartLimitInterval=0
+# [Install]
+# WantedBy=multi-user.target
+# EOF
 
-  chmod 0644 /etc/systemd/system/teamcity-agent.service
-  systemctl enable teamcity-agent
+#   chmod 0644 /etc/systemd/system/teamcity-agent.service
+#   systemctl enable teamcity-agent
 
-  wait_for_upgrade(){
-    local max_attempts=10
-    local attempt=1
-    local agent_log="/opt/teamcity-agent/logs/teamcity-agent.log"
-    while [[ "${attempt}" -le "${max_attempts}" ]]; do
-      if [[ -f "${agent_log}" ]]; then
-        if grep -q "Exit for upgrade" "${agent_log}"; then
-          echo "Agent upgrade complete"
-          return 0
-        fi
-      fi
-      echo "Agent upgrade not yet complete"
-      let attempt++
-      sleep 60
-    done
-    echo "Agent upgrade did not complete after ${max_attempts} attempts"
-    return 1
-  }
+#   wait_for_upgrade(){
+#     local max_attempts=10
+#     local attempt=1
+#     local agent_log="/opt/teamcity-agent/logs/teamcity-agent.log"
+#     while [[ "${attempt}" -le "${max_attempts}" ]]; do
+#       if [[ -f "${agent_log}" ]]; then
+#         if grep -q "Exit for upgrade" "${agent_log}"; then
+#           echo "Agent upgrade complete"
+#           return 0
+#         fi
+#       fi
+#       echo "Agent upgrade not yet complete"
+#       let attempt++
+#       sleep 60
+#     done
+#     echo "Agent upgrade did not complete after ${max_attempts} attempts"
+#     return 1
+#   }
 
-  # install stuff from TeamCity server, agent start will handle this.
-  systemctl start teamcity-agent
-  wait_for_upgrade
-  systemctl stop teamcity-agent
+#   # install stuff from TeamCity server, agent start will handle this.
+#   systemctl start teamcity-agent
+#   wait_for_upgrade
+#   systemctl stop teamcity-agent
 
-  sed -i "s/name=.*/name=/" /opt/teamcity-agent/conf/buildAgent.properties
-  sed -i "s/authorizationToken=.*/authorizationToken=/" /opt/teamcity-agent/conf/buildAgent.properties
-)}
+#   sed -i "s/name=.*/name=/" /opt/teamcity-agent/conf/buildAgent.properties
+#   sed -i "s/authorizationToken=.*/authorizationToken=/" /opt/teamcity-agent/conf/buildAgent.properties
+# )}
 
 function moveSymlinkEtcResolvConfScriptToCloudInit {
   echo "Moving symlink-etc-resolv-conf.sh to /var/lib/cloud/scripts/per-boot"
@@ -236,7 +236,7 @@ function shouldInstallCredentials() {
 }
 
 function main {
-  export DEBIAN_FRONTEND=noninteractive
+  #export DEBIAN_FRONTEND=noninteractive
   env | sort
 
   # we do that at the very beginning as it is crucial
