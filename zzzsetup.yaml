@@ -8,19 +8,19 @@
     #   command: "setenforce 0"
     #   become: yes
 
-    - name: "remove Docker packages"
-      apt:
-        name:
-          - docker
-          - docker-client
-          - docker-client-latest
-          - docker-common
-          - docker-latest
-          - docker-latest-logrotate
-          - docker-logrotate
-          - docker-engine
-        state: absent
-      become: yes
+    # - name: "remove Docker packages"
+    #   apt:
+    #     name:
+    #       - docker
+    #       - docker-client
+    #       - docker-client-latest
+    #       - docker-common
+    #       - docker-latest
+    #       - docker-latest-logrotate
+    #       - docker-logrotate
+    #       - docker-engine
+    #     state: absent
+    #   become: yes
 
     # - name: "add epel repo"
     #   yum:
