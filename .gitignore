@@ -9,3 +9,5 @@
 *.pub
 
 inventory
+
+**.DS_Store
