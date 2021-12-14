@@ -25,6 +25,19 @@ resource "aws_instance" "ubuntu-dev-machine" {
     
   }
 
+  provisioner "file" {
+    source      = "install.bash"
+    destination = "/home/ubuntu/install.bash"
+
+    connection {
+      type = "ssh"
+      user = "centos"
+      agent = true
+      host = self.public_dns
+      timeout = "2m"
+    }
+  }
+
   # connection {
   #   type        = "ssh"
   #   host        = self.public_ip
@@ -34,6 +47,8 @@ resource "aws_instance" "ubuntu-dev-machine" {
   # }
 }
 
+
+### Second Drive
 # resource "aws_ebs_volume" "ubuntu-dev-machine-volume" {
 #   #count             = var.control_plane_imagefs_volume_enabled ? var.control_plane_count : 0
 #   availability_zone = "us-west-2c"
