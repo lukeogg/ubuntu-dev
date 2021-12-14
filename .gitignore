@@ -9,3 +9,6 @@
 *.pub
 
 inventory
+inventory.tmpl
+
+.DS_Store
