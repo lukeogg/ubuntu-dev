@@ -31,9 +31,10 @@ resource "aws_instance" "ubuntu-dev-machine" {
 
     connection {
       type = "ssh"
-      user = "centos"
-      agent = true
+      user = "ubuntu"
+      agent = false
       host = self.public_dns
+      private_key = tls_private_key.dev_key.private_key_pem
       timeout = "2m"
     }
   }

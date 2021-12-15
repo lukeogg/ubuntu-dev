@@ -2,29 +2,6 @@
 set -euo pipefail
 #IFS=$'\n\t'
 
-# kommander_version=${KOMMANDER_VERSION:-v2.1.0}
-# dkp_version=${DKP_VERSION:-v2.1.0}
-
-# sudo yum -y update
-# sudo yum install -y \
-#   yum-utils \
-#   epel-release
-# sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
-# sudo yum install -y \
-#   docker-ce docker-ce-cli \
-#   containerd.io \
-#   unzip \
-#   bzip2 \
-#   ansible \
-#   tinyproxy
-# sudo systemctl start docker
-# sudo systemctl enable docker
-# sudo usermod -aG docker "$(whoami)"
-# curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-# chmod +x ./kubectl
-# curl -L https://github.com/kubernetes-sigs/cluster-api/releases/download/v0.3.14/clusterctl-linux-amd64 -o clusterctl
-# chmod +x ./clusterctl
-
 function _wget {
   wget --progress=dot -e dotbytes=1M "$@"
 }
@@ -33,7 +10,7 @@ function addRepos {
   apt-get update
   apt-get install -y software-properties-common
   # apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886
-  add-apt-repository -y ppa:deadsnakes/ppa
+  # add-apt-repository -y ppa:deadsnakes/ppa
   #add-apt-repository -y ppa:git-core/ppa
 }
 
@@ -72,28 +49,6 @@ EOF
   # Currently Docker does not enable the systemd service by default
   systemctl daemon-reload
   systemctl enable docker
-}
-
-function moveCredentialFilesIntoPlace() {
-  # The file provisioner provided by packer will only upload files as the user
-  # that it uses to ssh to the box.  This means that the files can only be
-  # written some place the current user can write to.
-  # To work around this fact, the whole directory is uploaded into /tmp
-  # and the files can then be moved into place by this script.
-  # See https://github.com/mitchellh/packer/issues/1551 for details.
-
-  mkdir -p /root/.m2
-  mv /tmp/agent-fs/root/.m2/settings-security.xml /root/.m2/settings-security.xml
-  echo -n -e "MVN_SETTINGS_SECURITY=mesosphere\n" >> /opt/teamcity-agent/conf/buildAgent.properties
-
-  mv /tmp/agent-fs/root/.gnupg /root/.gnupg
-  mv /tmp/agent-fs/root/.gnupg_dcos-cosmos /root/.gnupg_dcos-cosmos
-  echo -n -e "GPG2_KEYS=mesos-rxjava,dcos-cosmos\n" >> /opt/teamcity-agent/conf/buildAgent.properties
-
-  mv /tmp/agent-fs/root/.sbt /root/.sbt
-
-  rm -rf /tmp/agent-fs
-
 }
 
 #export DEBIAN_FRONTEND=noninteractive
@@ -140,9 +95,27 @@ apt-get install -y \
   tar \
   unzip
 
-apt-get dist-upgrade -y
+#apt-get dist-upgrade -y
 
-echo -n -e "GPG2=/usr/bin/gpg2\n" >> /opt/teamcity-agent/conf/buildAgent.properties
+# sudo yum -y update
+# sudo yum install -y \
+#   yum-utils \
+#   epel-release
+# sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+# sudo yum install -y \
+#   docker-ce docker-ce-cli \
+#   containerd.io \
+#   unzip \
+#   bzip2 \
+#   ansible \
+#   tinyproxy
+# sudo systemctl start docker
+# sudo systemctl enable docker
+# sudo usermod -aG docker "$(whoami)"
+# curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+# chmod +x ./kubectl
+# curl -L https://github.com/kubernetes-sigs/cluster-api/releases/download/v0.3.14/clusterctl-linux-amd64 -o clusterctl
+# chmod +x ./clusterctl
 
 addDocker
 
