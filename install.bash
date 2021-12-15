@@ -61,8 +61,8 @@ addRepos
 
 apt-get update
 apt-get install -y \
-  autoconf \
-  automake \
+  #autoconf \
+  #automake \
   build-essential \
   checkinstall \
   curl \
@@ -79,7 +79,7 @@ apt-get install -y \
   libbz2-dev \
   liblz4-tool \
   lzop \
-  openjdk-8-jdk-headless \
+  #openjdk-8-jdk-headless \
   pbzip2 \
   python-dev \
   python-pip \
@@ -95,6 +95,7 @@ apt-get install -y \
   tar \
   unzip
 
+#Takes too long
 #apt-get dist-upgrade -y
 
 # sudo yum -y update
@@ -112,10 +113,11 @@ apt-get install -y \
 # sudo systemctl start docker
 # sudo systemctl enable docker
 # sudo usermod -aG docker "$(whoami)"
-# curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-# chmod +x ./kubectl
-# curl -L https://github.com/kubernetes-sigs/cluster-api/releases/download/v0.3.14/clusterctl-linux-amd64 -o clusterctl
-# chmod +x ./clusterctl
+
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+chmod +x ./kubectl
+curl -L https://github.com/kubernetes-sigs/cluster-api/releases/download/v0.3.14/clusterctl-linux-amd64 -o clusterctl
+chmod +x ./clusterctl
 
 addDocker
 
@@ -125,14 +127,12 @@ gem update --system 3.0.5 && gem install fpm
 
 pip3 install --upgrade pip==9.0.3 && pip3 install tox httpie
 
+# AWS CLI
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 unzip awscliv2.zip
 ./aws/install
 rm -rf ./aws
 
+# Python
 apt-get install -y python3.4 python3.4-dev
 apt-get install -y python3.5 python3.5-dev
-
-
-echo "cat /opt/teamcity-agent/conf/buildAgent.properties"
-cat /opt/teamcity-agent/conf/buildAgent.properties
