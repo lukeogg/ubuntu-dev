@@ -18,13 +18,13 @@ resource "aws_instance" "ubuntu-dev-machine" {
   key_name = local.generated_key_name
   vpc_security_group_ids = [aws_security_group.main.id]
 
-  # use this to increase the ebs volume size
+  # use this to increase the ebs volume size and iops
   ebs_block_device {
     device_name = "/dev/sda1"
-    #volume_type               = "gp3"
+    volume_type               = "gp3"
     volume_size =  var.base_volume_size
-    #iops                      = 16000
-    #throughput                = 1000
+    iops                      = 16000
+    throughput                = 1000
   }
 
   provisioner "file" {
@@ -38,6 +38,22 @@ resource "aws_instance" "ubuntu-dev-machine" {
       host = self.public_dns
       private_key = tls_private_key.dev_key.private_key_pem
       timeout = "2m"
+    }
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "chmod +x /home/ubuntu/install.bash",
+      "sudo /home/ubuntu/install.bash",
+    ]
+
+    connection {
+      type = "ssh"
+      user = "ubuntu"
+      agent = false
+      host = self.public_dns
+      private_key = tls_private_key.dev_key.private_key_pem
+      timeout = "5m"
     }
   }
 
