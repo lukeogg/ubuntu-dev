@@ -21,3 +21,8 @@ ssh-add
     * need dowmnload script
 
 
+## Verify Github key
+```
+ssh-keyscan github.com >> githubKey
+ssh-keygen -lf githubKey
+```
