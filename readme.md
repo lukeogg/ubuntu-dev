@@ -23,3 +23,10 @@ $ terraform workspace new dev-machine2
 $ terraform init
 $ terraform apply
 ```
+
+## Set up repo and dev env
+
+``` shell
+# Run script to checkout kaptain repo and set env vars
+./local-setup.sh
+```
