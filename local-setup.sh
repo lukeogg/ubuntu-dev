@@ -21,6 +21,6 @@ scp -i $cert_path ~/.ssh/linux_cloud_dev_ed25519 ubuntu@$host:~/.ssh/linux_cloud
 ssh -i $cert_path ubuntu@$host "echo 'github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl'  >> ~/.ssh/known_hosts"
 
 echo Checkout kudo-kubeflow repo
-ssh -i $cert_path ubuntu@$host 'eval "$(ssh-agent -s)" && ssh-add ~/.ssh/linux_cloud_dev_ed25519 && git clone --recursive git@github.com:mesosphere/kudo-kubeflow.git'
+ssh -i $cert_path ubuntu@$host 'eval "$(ssh-agent -s)" && ssh-add ~/.ssh/linux_cloud_dev_ed25519 && git clone --recursive git@github.com:mesosphere/kaptain.git'
 
-ssh -i $cert_path ubuntu@$host 'export GITHUB_TOKEN=$(cat ~/.github_token)'
+#ssh -i $cert_path ubuntu@$host 'export GITHUB_TOKEN=$(cat ~/.github_token)'
