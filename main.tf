@@ -23,7 +23,6 @@ resource "aws_instance" "ubuntu-dev-machine" {
     device_name = "/dev/sda1"
     volume_type               = "gp3"
     volume_size =  var.base_volume_size
-    # max speed for gp3
     iops                      = 16000
     throughput                = 1000
   }
@@ -57,14 +56,6 @@ resource "aws_instance" "ubuntu-dev-machine" {
       timeout = "5m"
     }
   }
-
-  # connection {
-  #   type        = "ssh"
-  #   host        = self.public_ip
-  #   user        = "ubuntu"
-  #   private_key = file("/home/rahul/Jhooq/keys/aws/aws_key")
-  #   timeout     = "4m"
-  # }
 }
 
 
