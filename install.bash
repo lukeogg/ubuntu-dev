@@ -17,7 +17,11 @@ apt-get install -y \
   python3-pip \
   python3-venv \
   tar \
-  unzip
+  unzip \
+  iotop \
+  fio \
+  sysstat \
+  strace
 
 
 # Docker
