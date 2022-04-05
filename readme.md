@@ -19,12 +19,17 @@ export GITHUB_REPO="git@github.com:path-to-my-repo.git"
 
 Start the dev machine.
 
-
 ``` shell
-terraform apply var owner="$(whoami)"
+terraform apply -var owner="$(whoami)"
 ```
 
 The command will output the public dns of the machine as well as an SSH connection string. It is recommended to use tmux to prevent commands from failing due to connection.
+
+To connect:
+
+``` shell
+./connect.sh
+```
 
 ## Multiple Workspaces
 You can create multiple machines this way:
