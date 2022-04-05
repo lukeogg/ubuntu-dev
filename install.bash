@@ -4,7 +4,6 @@ set -euo pipefail
 
 apt-get update
 
-# not sure of we need this
 #apt-get install -y software-properties-common
 
 apt-get install -y \
