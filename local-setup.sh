@@ -29,8 +29,15 @@ echo Write hostname file...
 echo $host > hostname
 
 echo Copy private key ${github_cert_path} to host for GitHub...
-scp -i $cert_path ${github_cert_path} ubuntu@$host:~/.ssh/
-ssh -i $cert_path ubuntu@$host "echo 'github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl'  >> ~/.ssh/known_hosts"
+scp -i $cert_path ${github_cert_path} ubuntu@$host:~/.ssh/$github_cert_file
+
+# Add Public Key to known_hosts
+a=$(cat ${github_cert_path}.pub)
+arr=($a)
+public_key=${arr[@]:0:2}
+
+ssh -i $cert_path ubuntu@$host "echo $public_key  >> ~/.ssh/known_hosts"
 
 echo Checkout the repo
-ssh -i $cert_path ubuntu@$host eval "$(ssh-agent -s)" && ssh-add ~/.ssh/$github_cert_file && git clone --recursive $github_repo
+
+ssh -i $cert_path ubuntu@$host 'eval "$(ssh-agent -s)" && ssh-add ~/.ssh/'$github_cert_file' && git clone --recursive '$github_repo
