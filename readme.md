@@ -20,6 +20,7 @@ export GITHUB_REPO=git@github.com:<path-to-my-repo.git>
 ### Start the dev machine
 
 ``` shell
+terraform init
 terraform apply -var owner="$(whoami)"
 ```
 

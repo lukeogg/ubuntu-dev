@@ -13,3 +13,4 @@ inventory
 **.DS_Store
 hostname
 workspace.code-workspace
+deploy-cluster.sh
