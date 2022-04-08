@@ -14,3 +14,6 @@ inventory
 hostname
 workspace.code-workspace
 deploy-cluster.sh
+
+a2295590-inviting-giraffe-dev-key-pair.pem
+.terraform.lock.hcl
