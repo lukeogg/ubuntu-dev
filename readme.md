@@ -14,7 +14,7 @@ Create a [github certificate](https://docs.github.com/en/enterprise-server@3.2/a
 
 ``` shell
 export GITHUB_CERT_PATH=~/.ssh/<name_of_my_cert>  # no .pub here
-export GITHUB_REPO=git@github.com:path-to-my-repo.git
+export GITHUB_REPO=git@github.com:<path-to-my-repo.git>
 ```
 
 ### Start the dev machine
