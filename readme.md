@@ -4,23 +4,31 @@
 Requires Terraform v0.13.7. Use (tfenv)[https://github.com/tfutils/tfenv] for installation.
 
 ## Creation
-Edit the `terraform.tfvars` file and adjust owner and instance_type values.
+Edit the `terraform.tfvars` file and adjust the instance_type values.
 
 To install apply the terraform files. This will generate a key pair and create the machine.
 
 Create a [github certificate](https://docs.github.com/en/enterprise-server@3.2/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
 
-### Set path for setup script and repo to clone
+### Set path for the GitHub private key and repo to clone
 
 ``` shell
 export GITHUB_CERT_PATH=~/.ssh/<name_of_my_cert>  # no .pub here
 export GITHUB_REPO=git@github.com:<path-to-my-repo.git>
 ```
 
-### Start the dev machine
-
+### Initiate Terraform
 ``` shell
 terraform init
+```
+
+### Make sure you have logged in AWS recently
+``` shell
+eval $(maws li <somelongnumber-Someaws_Accountname>)
+```
+
+### Start the dev machine
+``` shell
 terraform apply -var owner="$(whoami)"
 ```
 
@@ -38,6 +46,18 @@ The command will output the public dns of the machine as well as an SSH connecti
 # Run script to checkout dev repo and set env vars
 ./local-setup.sh
 ```
+
+### Deploy the default version of a cluster
+``` shell
+# You can specify EXPIRATION_TIME providing an integer.  Default is 12 hours
+./deploy-kappy.sh
+```
+
+### Obtain credentials after deployment:
+``` shell
+./retrieve-credentials.sh
+```
+
 
 ## Multiple Workspaces
 You can create multiple machines this way:

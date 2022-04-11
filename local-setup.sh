@@ -32,9 +32,6 @@ echo Copy private key ${github_cert_path} to host for GitHub...
 scp -i $cert_path ${github_cert_path} ubuntu@$host:~/.ssh/
 
 # Add Public Key to known_hosts
-a=$(cat ${github_cert_path}.pub)
-arr=($a)
-known_host=${arr[@]:0:2}
 ssh -i $cert_path ubuntu@$host "ssh-keyscan github.com >> ~/.ssh/known_hosts"
 
 echo Checkout the repo
