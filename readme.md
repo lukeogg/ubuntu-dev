@@ -47,6 +47,12 @@ The command will output the public dns of the machine as well as an SSH connecti
 ./local-setup.sh
 ```
 
+### Login to DockerHub
+``` shell
+docker login
+# You'll have to enter credentials
+```
+
 ### Deploy the default version of a cluster
 ``` shell
 # You can specify EXPIRATION_TIME providing an integer.  Default is 12 hours

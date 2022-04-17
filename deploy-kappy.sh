@@ -10,18 +10,37 @@
 #done
 
 
-if [ -z "$EXPIRATION_TIME" ]
+# check for AWS_EXPIRATION, and GPU_ENABLED variables
+if [ -z "$AWS_EXPIRATION" ]
 then
     echo "
-        You can export EXPIRATION_TIME with an integer for hours to timeout.  Default is 10
+        You need to export AWS_EXPIRATION with an integer for hours to timeout.  
+        Example: export AWS_EXPIRATION=12h
         "
-    EXPIRATION_TIME=10h
-else
-    EXPIRATION_TIME="$EXPIRATION_TIMEh"
+    exit 1
 fi				
 
-echo "EXPIRATION_TIME=$EXPIRATION_TIME"
-sleep 4
+if [ -z "$GPU_ENABLED" ]
+then
+    echo "
+        You need to export GPU_ENABLED with a boolean for GPU support.
+        "
+    exit 1
+fi
+
+if [ -z "$MAWS_ACCOUNT" ]
+then
+    echo "
+        You need to export MAWS_ACCOUNT to continue
+        "
+    exit 1
+fi
+
+echo "AWS_EXPIRATION=$AWS_EXPIRATION"
+echo "GPU_ENABLED=$GPU_ENABLED"
+echo "MAWS_ACCOUNT=$MAWS_ACCOUNT"
+
+
 
 #==================================== Default Variables ==========================================#
 # Get Host from inventory file
@@ -33,18 +52,22 @@ echo Key file: $cert_path
 
 
 #==================================== Obtain AWS Credentials ==========================================#
-eval $(maws li 327650738955_Mesosphere-PowerUser)
+eval $(maws li "$MAWS_ACCOUNT")
 
 
 #==================================== Deploy Cluster =============================================#
 
 ssh -T -i $cert_path ubuntu@$host << HEREDOC
-    sudo apt-get update 
-    cd kudo-kubeflow 
+    cd ~/kudo-kubeflow
     sudo usermod -aG docker ubuntu
     newgrp docker
     make clean-all
-    ~/dkp delete bootstrap --kubeconfig $HOME/.kube/config
+    
+    export AWS_EXPIRATION="$AWS_EXPIRATION" GPU_ENABLED="$GPU_ENABLED"
+    echo "
+        AWS_EXPIRATION=\$AWS_EXPIRATION GPU_ENABLED=\$GPU_ENABLED
+    "
+    ~/kaptain/tools/dkp/dkp.sh delete bootstrap --kubeconfig $HOME/.kube/config
     unset KUBECONFIG
     make cluster-create kommander-install install
 HEREDOC

@@ -12,7 +12,7 @@ variable "owner" {
 
 variable "expiration" {
   type = string
-  default = "8h"
+  default = "12h"
   description = "Time before cloudkeeper cleans up resources"
 }
 
