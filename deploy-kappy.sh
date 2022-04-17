@@ -57,17 +57,23 @@ eval $(maws li "$MAWS_ACCOUNT")
 
 #==================================== Deploy Cluster =============================================#
 
+ssh -T -i $cert_path ubuntu@$host 'sudo mv ~/kubectl //usr/local/bin/kubectl'
+
 ssh -T -i $cert_path ubuntu@$host << HEREDOC
     cd ~/kudo-kubeflow
+
     sudo usermod -aG docker ubuntu
     newgrp docker
+
     make clean-all
     
     export AWS_EXPIRATION="$AWS_EXPIRATION" GPU_ENABLED="$GPU_ENABLED"
     echo "
         AWS_EXPIRATION=\$AWS_EXPIRATION GPU_ENABLED=\$GPU_ENABLED
     "
+
     ~/kaptain/tools/dkp/dkp.sh delete bootstrap --kubeconfig $HOME/.kube/config
     unset KUBECONFIG
+    
     make cluster-create kommander-install install
 HEREDOC
