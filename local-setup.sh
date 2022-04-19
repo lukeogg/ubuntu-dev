@@ -18,11 +18,6 @@ else
     echo -e "\nGIT_USER=${git_user}, GIT_EMAIL=${git_email}\n"
 fi
 
-if [ -z "$MAWS_ACCOUNT" ]; then
-    read -p "Please enter an AWS account to continue..."$'\n' MAWS_ACCOUNT
-fi
-eval $(maws li "$MAWS_ACCOUNT")
-
 if [ -n "$1" ]; then
     cert_path = $1
 else
