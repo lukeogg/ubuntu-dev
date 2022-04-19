@@ -18,4 +18,4 @@ a2295590-inviting-giraffe-dev-key-pair.pem
 .terraform.lock.hcl
 
 test.sh
-commands.txt
+secrets.txt
