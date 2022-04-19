@@ -44,7 +44,7 @@ resource "aws_instance" "ubuntu-dev-machine" {
   provisioner "remote-exec" {
     inline = [
       "chmod +x /home/ubuntu/install.bash",
-      "sudo /home/ubuntu/install.bash",
+      "sudo /home/ubuntu/install.bash"
     ]
 
     connection {
