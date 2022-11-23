@@ -9,7 +9,9 @@ resource "aws_instance" "ubuntu-dev-machine" {
   ami = var.ami
   instance_type = var.instance_type
   availability_zone = "us-west-2c"
-  iam_instance_profile = "var.iam_instance_profile"
+  iam_instance_profile = var.iam_instance_profile
+  # for insights only
+  subnet_id = "subnet-0f04bbe3fcbf3ad1c"
   tags = {
     owner = var.owner
     expiration = var.expiration

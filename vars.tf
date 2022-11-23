@@ -1,13 +1,17 @@
 variable "ami" {
-  type = string      
+  type = string
+}
+
+variable "iam_instance_profile" {
+  type = string
 }
 
 variable "instance_type" {
-  type = string 
+  type = string
 }
 
 variable "owner" {
-  type = string 
+  type = string
 }
 
 variable "expiration" {

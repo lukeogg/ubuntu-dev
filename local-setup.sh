@@ -37,6 +37,15 @@ arr=($a)
 known_host=${arr[@]:0:2}
 ssh -i $cert_path ubuntu@$host "ssh-keyscan github.com >> ~/.ssh/known_hosts"
 
+# docker permissions
+ssh -i $cert_path ubuntu@$host "sudo usermod -aG docker ubuntu"
+
 echo Checkout the repo
 
-ssh -i $cert_path ubuntu@$host 'eval "$(ssh-agent -s)" && ssh-add ~/.ssh/'$github_cert_file' && git clone --recursive '$github_repo
+ssh -i $cert_path ubuntu@$host 'eval "$(ssh-agent)" && ssh-add ~/.ssh/'$github_cert_file' && git clone --recursive 'git@github.com:mesosphere/dkp-insights.git
+
+# set .bashrc
+scp -i $cert_path bashrc ubuntu@$host:~/bashrc
+ssh -i $cert_path ubuntu@$host "mv bashrc .bashrc"
+
+scp -i $cert_path gitconfig ubuntu@$host:~/.gitconfig
