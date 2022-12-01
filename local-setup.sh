@@ -42,7 +42,7 @@ ssh -i $cert_path ubuntu@$host "sudo usermod -aG docker ubuntu"
 
 echo Checkout the repo
 
-ssh -i $cert_path ubuntu@$host 'eval "$(ssh-agent)" && ssh-add ~/.ssh/'$github_cert_file' && git clone --recursive 'git@github.com:mesosphere/dkp-insights.git
+ssh -i $cert_path ubuntu@$host 'mkdir -p ~/go/src/github.com/mesosphere && cd ~/go/src/github.com/mesosphere && eval "$(ssh-agent)" && ssh-add ~/.ssh/'$github_cert_file' && git clone --recursive 'git@github.com:mesosphere/dkp-insights.git
 
 # set .bashrc
 scp -i $cert_path bashrc ubuntu@$host:~/bashrc
