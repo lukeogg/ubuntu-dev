@@ -3,8 +3,10 @@
 ## Prerequisites 
 Requires Terraform v0.13.7. Use (tfenv)[https://github.com/tfutils/tfenv] for installation.
 
+If you're working with an M1 Mac laptop, try installing Terraform v1.0.11.
+
 ## Creation
-Edit the `terraform.tfvars` file and adjust owner and instance_type values.
+Edit the `terraform.tfvars` file and adjust owner, instance_type and iam_instance_profile values.
 
 To install apply the terraform files. This will generate a key pair and create the machine.
 
@@ -21,6 +23,10 @@ export GITHUB_REPO=git@github.com:<path-to-my-repo.git>
 
 ``` shell
 terraform init
+# optional
+# cat <<EOF > .terraform.version
+# <semvar_value_of_the_version_you_just_installed>
+# EOF
 terraform apply -var owner="$(whoami)"
 ```
 
