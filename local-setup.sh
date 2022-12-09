@@ -31,6 +31,9 @@ echo $host > hostname
 echo Copy private key ${github_cert_path} to host for GitHub...
 scp -i $cert_path ${github_cert_path} ubuntu@$host:~/.ssh/
 
+echo Copy bootstrap script to home directory...
+scp -i $cert_path bootstrap.sh ubuntu@$host:~/bootstrap.sh
+
 # Add Public Key to known_hosts
 a=$(cat ${github_cert_path}.pub)
 arr=($a)
