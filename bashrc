@@ -122,3 +122,5 @@ export PATH=$PATH:/usr/local/go/bin:/home/ubuntu/go/src/github.com/mesosphere/dk
 
 eval "$(ssh-agent)" && ssh-add ~/.ssh/id_rsa
 echo 'export PATH=/home/ubuntu/.local/bin:$PATH' > ~/.bashrc
+
+cd ~/notebooks
