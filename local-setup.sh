@@ -49,10 +49,10 @@ ssh -i $cert_path ubuntu@$host 'eval "$(ssh-agent)" && ssh-add ~/.ssh/'$github_c
 
 # set .bashrc
 scp -i $cert_path bashrc ubuntu@$host:~/bashrc
-ssh -i $cert_path ubuntu@$host "mv bashrc .bashrc"
+ssh -i $cert_path ubuntu@$host "mv bashrc .bashrc && source ~/.bashrc"
 
 scp -i $cert_path gitconfig ubuntu@$host:~/.gitconfig
 
 # Install Jupyter Notebook
-ssh -i $cert_path ubuntu@$host 'pip install jupyter markupsafe==2.0.1 && cd notebooks && nohup /home/ubuntu/.local/bin/jupyter notebook --ip=0.0.0.0 --no-browser &'
+ssh -i $cert_path ubuntu@$host 'pip install jupyter markupsafe==2.0.1 && cd notebooks && nohup jupyter notebook --ip=0.0.0.0 --no-browser &'
 
