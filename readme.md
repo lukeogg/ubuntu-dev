@@ -27,7 +27,7 @@ terraform init
 # cat <<EOF > .terraform.version
 # <semvar_value_of_the_version_you_just_installed>
 # EOF
-terraform apply -var owner="$(whoami)"
+terraform apply -var owner="$(whoami)" -auto-approve
 ```
 
 The command will output the public dns of the machine as well as an SSH connection string. It is recommended to use tmux to prevent commands from failing due to connection.
@@ -51,5 +51,5 @@ You can create multiple machines this way:
 ```
 $ terraform workspace new dev-machine2
 $ terraform init
-$ terraform apply
+$ terraform apply -auto-approve
 ```

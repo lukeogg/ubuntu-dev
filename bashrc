@@ -119,15 +119,6 @@ fi
 export GOOS=linux
 export GOARCH=amd64
 export PATH=$PATH:/usr/local/go/bin:/home/ubuntu/go/src/github.com/mesosphere/dkp-insights/.local/tools:/home/ubuntu/go/src/github.com/mesosphere/dkp-insights/.local/tools/golang/bin:/home/ubuntu/go/src/github.com/mesosphere/dkp-insights/.local/tools/go/bin
-export GITHUB_TOKEN= # your GITHUB_TOKEN
 
-# docker credentials
-export DOCKER_USERNAME= # your docker username
-export DOCKER_PASSWORD= # your docker password
-
-# dkp-insights variables (optionals)
-export TAG_OWNER=kostas
-export CLUSTER_NAME=kostas-insights-dev
-export KIND_CLUSTER_NAME=kostas-insights-dev-kind
-export TAG_EXPIRATION=10h
-eval "$(ssh-agent)" && ssh-add ~/.ssh/# <path_to_key>
+eval "$(ssh-agent)" && ssh-add ~/.ssh/id_rsa
+echo 'export PATH=/home/ubuntu/.local/bin:$PATH' > ~/.bashrc

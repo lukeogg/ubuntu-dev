@@ -113,6 +113,17 @@ resource "aws_security_group" "main" {
      security_groups  = []
      self             = false
      to_port          = 22
+  },
+  {
+       cidr_blocks      = [ "0.0.0.0/0", ]
+       description      = ""
+       from_port        = 8888
+       ipv6_cidr_blocks = []
+       prefix_list_ids  = []
+       protocol         = "tcp"
+       security_groups  = []
+       self             = false
+       to_port          = 8888
   }
   ]
 }
@@ -134,12 +145,12 @@ resource "aws_key_pair" "generated_key" {
   }
 }
 
-### The Ansible inventory 
+### The Ansible inventory
 resource "local_file" "AnsibleInventory" {
   content = templatefile("inventory.tmpl", {
-      private-dns = aws_instance.ubuntu-dev-machine.*.public_dns,  
-      private-ip = aws_instance.ubuntu-dev-machine.*.public_ip,  
-      private-id = aws_instance.ubuntu-dev-machine.*.id 
+      private-dns = aws_instance.ubuntu-dev-machine.*.public_dns,
+      private-ip = aws_instance.ubuntu-dev-machine.*.public_ip,
+      private-id = aws_instance.ubuntu-dev-machine.*.id
       key-file-path = "${local.generated_key_name}.pem"
       }
   )
