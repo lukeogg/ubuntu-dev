@@ -45,7 +45,7 @@ ssh -i $cert_path ubuntu@$host "sudo usermod -aG docker ubuntu"
 
 echo Checkout the repo
 
-ssh -i $cert_path ubuntu@$host 'eval "$(ssh-agent)" && ssh-add ~/.ssh/'$github_cert_file' && git clone 'git@github.com:d2iq-labs/notebooks.git' && cd notebooks'
+ssh -i $cert_path ubuntu@$host 'eval "$(ssh-agent)" && ssh-add ~/.ssh/'$github_cert_file' && git clone 'git@github.com:d2iq-labs/notebooks.git''
 
 # set .bashrc
 scp -i $cert_path bashrc ubuntu@$host:~/bashrc
@@ -54,5 +54,5 @@ ssh -i $cert_path ubuntu@$host "mv bashrc .bashrc"
 scp -i $cert_path gitconfig ubuntu@$host:~/.gitconfig
 
 # Install Jupyter Notebook
-ssh -i $cert_path ubuntu@$host 'pip install jupyter && nohup /home/ubuntu/.local/bin/jupyter notebook --ip=0.0.0.0 --no-browser &'
+ssh -i $cert_path ubuntu@$host 'pip install jupyter markupsafe==2.0.1 && cd notebooks && nohup /home/ubuntu/.local/bin/jupyter notebook --ip=0.0.0.0 --no-browser &'
 
