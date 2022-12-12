@@ -121,6 +121,6 @@ export GOARCH=amd64
 export PATH=$PATH:/usr/local/go/bin:/home/ubuntu/go/src/github.com/mesosphere/dkp-insights/.local/tools:/home/ubuntu/go/src/github.com/mesosphere/dkp-insights/.local/tools/golang/bin:/home/ubuntu/go/src/github.com/mesosphere/dkp-insights/.local/tools/go/bin
 
 eval "$(ssh-agent)" && ssh-add ~/.ssh/id_rsa
-echo 'export PATH=/home/ubuntu/.local/bin:$PATH' > ~/.bashrc
+export PATH=/home/ubuntu/.local/bin:$PATH
 
 cd ~/notebooks
