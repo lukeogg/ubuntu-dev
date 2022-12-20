@@ -71,3 +71,7 @@ curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip
 unzip awscliv2.zip
 ./aws/install
 rm -rf ./aws
+
+curl -L -O https://github.com/derailed/k9s/releases/download/v0.26.7/k9s_Linux_x86_64.tar.gz
+tar xf k9s_Linux_x86_64.tar.gz
+rm k9s_Linux_x86_64.tar.gz
