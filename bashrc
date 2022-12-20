@@ -130,4 +130,4 @@ export TAG_OWNER=kostas
 export CLUSTER_NAME=kostas-insights-dev
 export KIND_CLUSTER_NAME=kostas-insights-dev-kind
 export TAG_EXPIRATION=10h
-eval "$(ssh-agent)" && ssh-add ~/.ssh/# <path_to_key>
+eval "$(ssh-agent)" && ssh-add ~/.ssh/linux_cloud_dev_ed25519
