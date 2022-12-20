@@ -2,11 +2,11 @@
 set -euo pipefail
 #IFS=$'\n\t'
 
-apt-get update
+sudo apt-get update
 
 #apt-get install -y software-properties-common
 
-apt-get install -y \
+sudo apt-get install -y \
   curl \
   git \
   gnupg2 \
