@@ -126,8 +126,8 @@ export DOCKER_USERNAME= # your docker username
 export DOCKER_PASSWORD= # your docker password
 
 # dkp-insights variables (optionals)
-export TAG_OWNER=kostas
-export CLUSTER_NAME=kostas-insights-dev
-export KIND_CLUSTER_NAME=kostas-insights-dev-kind
-export TAG_EXPIRATION=10h
+export TAG_OWNER=lukeogg
+export CLUSTER_NAME=lukeogg-insights-dev
+export KIND_CLUSTER_NAME=lukeogg-insights-dev-kind
+export TAG_EXPIRATION=24hr
 eval "$(ssh-agent)" && ssh-add ~/.ssh/linux_cloud_dev_ed25519
