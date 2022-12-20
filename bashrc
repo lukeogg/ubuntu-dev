@@ -129,5 +129,5 @@ export DOCKER_PASSWORD= # your docker password
 export TAG_OWNER=$(whoami)
 export CLUSTER_NAME=$TAG_OWNER-insights-dev
 export KIND_CLUSTER_NAME=$TAG_OWNER-insights-dev-kind
-export TAG_EXPIRATION=14h
-eval "$(ssh-agent)" && ssh-add ~/.ssh/# <path_to_key>
+export TAG_EXPIRATION=24hr
+eval "$(ssh-agent)" && ssh-add ~/.ssh/linux_cloud_dev_ed25519
