@@ -129,7 +129,7 @@ export DOCKER_USERNAME= # your docker username
 export DOCKER_PASSWORD= # your docker password
 
 # dkp-insights variables (optionals)
-export TAG_OWNER=kostas
+export TAG_OWNER=kostas # make sure to substitue with your name
 export CLUSTER_NAME=kostas-insights-dev
 export KIND_CLUSTER_NAME=kostas-insights-dev-kind
 export TAG_EXPIRATION=10h
