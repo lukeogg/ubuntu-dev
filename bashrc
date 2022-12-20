@@ -116,6 +116,9 @@ if ! shopt -oq posix; then
   fi
 fi
 
+. $HOME/.asdf/asdf.sh
+. $HOME/.asdf/completions/asdf.bash
+
 export GOOS=linux
 export GOARCH=amd64
 export PATH=$PATH:/usr/local/go/bin:/home/ubuntu/go/src/github.com/mesosphere/dkp-insights/.local/tools:/home/ubuntu/go/src/github.com/mesosphere/dkp-insights/.local/tools/golang/bin:/home/ubuntu/go/src/github.com/mesosphere/dkp-insights/.local/tools/go/bin
@@ -130,4 +133,8 @@ export TAG_OWNER=kostas
 export CLUSTER_NAME=kostas-insights-dev
 export KIND_CLUSTER_NAME=kostas-insights-dev-kind
 export TAG_EXPIRATION=10h
+# for backend chart installation
+export INSIGHTS_NAMESPACE=kommander
+export INSIGHTS_WORKSPACE_NAME=kommander
+
 eval "$(ssh-agent)" && ssh-add ~/.ssh/# <path_to_key>

@@ -66,6 +66,9 @@ chmod 700 get_helm.sh
 ./get_helm.sh
 rm get_helm.sh
 
+# asdf
+git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.10.2
+
 # AWS CLI
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 unzip awscliv2.zip

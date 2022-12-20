@@ -8,8 +8,8 @@ YELLOW='\033[1;33m'
 NC='\033[0m'
 
 
-if [ -z "${GITHUB_CERT_PATH}" ] || [ -z "${GITHUB_REPO}" ]; then
-  echo -e "${YELLOW}Please set the GITHUB_CERT_PATH and GITHUB_REPO environment variables${NC}"
+if [ -z "${GITHUB_CERT_PATH}" ]; then
+  echo -e "${YELLOW}Please set the GITHUB_CERT_PATH environment variable${NC}"
 fi
 
 if [ -n "$1" ]; then
@@ -43,6 +43,7 @@ ssh -i $cert_path ubuntu@$host "sudo usermod -aG docker ubuntu"
 echo Checkout the repo
 
 ssh -i $cert_path ubuntu@$host 'mkdir -p ~/go/src/github.com/mesosphere && cd ~/go/src/github.com/mesosphere && eval "$(ssh-agent)" && ssh-add ~/.ssh/'$github_cert_file' && git clone --recursive 'git@github.com:mesosphere/dkp-insights.git
+scp -i $cert_path repo-setup.sh ubuntu@$host:~/go/src/github.com/mesosphere/dkp-insights
 
 # set .bashrc
 scp -i $cert_path bashrc ubuntu@$host:~/bashrc

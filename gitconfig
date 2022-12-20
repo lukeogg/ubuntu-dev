@@ -1,2 +1,10 @@
 [url "git@github.com:"]
         insteadOf = https://github.com/
+[user]
+        name = # your GH username
+        email = # your GH e-mail
+        signingkey = # your GPG signkey
+[commit]
+        gpgSign = true
+[tag]
+        gpgSign = true
