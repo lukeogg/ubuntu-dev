@@ -21,7 +21,8 @@ sudo apt-get install -y \
   fio \
   sysstat \
   strace \
-  xdg-utils
+  xdg-utils \
+  jq
 
 
 # Docker
