@@ -125,6 +125,23 @@ export GITHUB_TOKEN= # your GITHUB_TOKEN
 export DOCKER_USERNAME= # your docker username
 export DOCKER_PASSWORD= # your docker password
 
+# Go Path
+export GOPATH="$HOME/go"
+
+# dkp-insights variables
+export IR=${GOPATH}/src/github.com/mesosphere/dkp-insights
+export PATH=${IR}/.local/tools:${PATH}
+
+#export BACKEND_KUBECONFIG=${IR}/artifacts/backend.kubeconfig
+#export MANAGEMENT_KUBECONFIG=${IR}/artifacts/management.kubeconfig
+#export DAILY_KUBECONFIG=${HOME}/repositories/daily-cluster/dkp-daily.conf
+
+# export DOCKER_USERNAME=<your_docker_login>
+# export DOCKER_PASSWORD="<your_docker_password>"
+
+export USE_KIND_CLUSTERS=true
+export INSIGHTS_NAMESPACE=kommander
+
 # dkp-insights variables (optionals)
 export TAG_OWNER=$(whoami)
 export CLUSTER_NAME=$TAG_OWNER-insights-dev
