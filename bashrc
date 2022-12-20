@@ -139,8 +139,8 @@ export PATH=${IR}/.local/tools:${PATH}
 # export DOCKER_USERNAME=<your_docker_login>
 # export DOCKER_PASSWORD="<your_docker_password>"
 
-export USE_KIND_CLUSTERS=true
-export INSIGHTS_NAMESPACE=kommander
+#export USE_KIND_CLUSTERS=true
+#export INSIGHTS_NAMESPACE=kommander
 
 # dkp-insights variables (optionals)
 export TAG_OWNER=$(whoami)
