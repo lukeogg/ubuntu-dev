@@ -144,7 +144,7 @@ export PATH=${IR}/.local/tools:${PATH}
 
 # dkp-insights variables (optionals)
 export TAG_OWNER=$(whoami)
-export CLUSTER_NAME=$TAG_OWNER-insights-dev
-export KIND_CLUSTER_NAME=$TAG_OWNER-insights-dev-kind
+#export CLUSTER_NAME=$TAG_OWNER-insights-dev
+#export KIND_CLUSTER_NAME=$TAG_OWNER-insights-dev-kind
 export TAG_EXPIRATION=24hr
 eval "$(ssh-agent)" && ssh-add ~/.ssh/linux_cloud_dev_ed25519
