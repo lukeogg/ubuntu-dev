@@ -2,11 +2,11 @@
 set -euo pipefail
 #IFS=$'\n\t'
 
-sudo apt-get update
+apt-get update
 
 #apt-get install -y software-properties-common
 
-sudo apt-get install -y \
+apt-get install -y \
   curl \
   git \
   gnupg2 \
@@ -26,7 +26,7 @@ sudo apt-get install -y \
 
 
 # Docker
-sudo apt-get install -y \
+apt-get install -y \
     ca-certificates \
     curl \
     gnupg \
