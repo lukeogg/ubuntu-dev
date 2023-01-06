@@ -13,7 +13,7 @@ sync:
 	# Perform initial sync
 	rsync $(RSYNC_OPTS)
 	# Watch for changes and sync
-	fswatch -r -v $(TARGET_REPO) | xargs -I{} rsync $(RSYNC_OPTS)
+	fswatch --one-per-batch --recursive --latency 1 $(TARGET_REPO) | xargs -I{} rsync $(RSYNC_OPTS)
 
 .PHONY: connect
 connect:
