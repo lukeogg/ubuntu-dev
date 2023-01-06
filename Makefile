@@ -17,7 +17,7 @@ sync:
 
 .PHONY: connect
 connect:
-	ssh -i $(EC2_SSH_KEY) -o "StrictHostKeyChecking=accept-new" $(EC2_INSTANCE_USER)@$(EC2_INSTANCE_HOST)
+	ssh -i $(EC2_SSH_KEY) -o "StrictHostKeyChecking=accept-new" -o "ServerAliveInterval=3600" $(EC2_INSTANCE_USER)@$(EC2_INSTANCE_HOST)
 
 .PHONY: create
 create:

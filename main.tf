@@ -73,7 +73,7 @@ resource "aws_instance" "ubuntu-dev-machine" {
 
   provisioner "remote-exec" {
     inline = [
-      "chmod +x /home/ubuntu/install.bash",
+      "chmod +x /home/ubuntu/install.bash /home/ubuntu/bootstrap.sh",
       "sudo /home/ubuntu/install.bash"
     ]
 
