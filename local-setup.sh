@@ -47,6 +47,8 @@ echo Checkout the repo
 
 ssh -i $cert_path ubuntu@$host 'mkdir -p ~/go/src/github.com/mesosphere && cd ~/go/src/github.com/mesosphere && eval "$(ssh-agent)" && ssh-add ~/.ssh/'$github_cert_file' && git clone --recursive 'git@github.com:mesosphere/dkp-insights.git
 
+# Finish setting up git
+scp -i $cert_path ~/.gitconfig ubuntu@$host:~/.gitconfig
 
 # set .env
 echo DOCKER_USERNAME=${DOCKER_USERNAME} >> bashrc

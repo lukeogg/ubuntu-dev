@@ -44,6 +44,8 @@ apt-get install -y \
   docker-ce-cli \
   containerd.io
 
+# pip install
+pip install pre-commit #for kommander
 
 # k8s
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
