@@ -10,9 +10,6 @@ export BACKEND_KUBECONFIG=${IR}/artifacts/backend.kubeconfig
 export MANAGEMENT_KUBECONFIG=${IR}/artifacts/management.kubeconfig
 export DAILY_KUBECONFIG=${HOME}/repositories/daily-cluster/dkp-daily.conf
 
-# export DOCKER_USERNAME=<your_docker_login>
-# export DOCKER_PASSWORD="<your_docker_password>"
-
 export USE_KIND_CLUSTERS=true
 export INSIGHTS_NAMESPACE=kommander
 
