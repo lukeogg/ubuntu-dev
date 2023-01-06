@@ -1,10 +1,7 @@
 #!/bin/bash
 set -euo pipefail
-#IFS=$'\n\t'
 
 apt-get update
-
-#apt-get install -y software-properties-common
 
 apt-get install -y \
   curl \
@@ -44,6 +41,7 @@ apt-get install -y \
   docker-ce-cli \
   containerd.io
 
+usermod -aG docker ubuntu
 
 # k8s
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
@@ -76,4 +74,8 @@ rm -rf ./aws
 # k9s
 curl -L -O https://github.com/derailed/k9s/releases/download/v0.26.7/k9s_Linux_x86_64.tar.gz
 tar xf k9s_Linux_x86_64.tar.gz
+mv k9s /usr/local/bin
 rm k9s_Linux_x86_64.tar.gz
+
+mkdir -p /home/ubuntu/go/src/github.com/mesosphere
+chown -R ubuntu:ubuntu go

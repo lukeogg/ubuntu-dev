@@ -30,6 +30,34 @@ resource "aws_instance" "ubuntu-dev-machine" {
   }
 
   provisioner "file" {
+      source      = "dotfiles/"
+      destination = "/home/ubuntu"
+
+      connection {
+        type = "ssh"
+        user = "ubuntu"
+        agent = false
+        host = self.public_dns
+        private_key = tls_private_key.dev_key.private_key_pem
+        timeout = "2m"
+      }
+  }
+
+  provisioner "file" {
+        source      = "bootstrap.sh"
+        destination = "/home/ubuntu/bootstrap.sh"
+
+        connection {
+          type = "ssh"
+          user = "ubuntu"
+          agent = false
+          host = self.public_dns
+          private_key = tls_private_key.dev_key.private_key_pem
+          timeout = "2m"
+        }
+    }
+
+  provisioner "file" {
     source      = "install.bash"
     destination = "/home/ubuntu/install.bash"
 
