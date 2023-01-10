@@ -23,7 +23,7 @@ sync-repo:
 # Create SSH tunnel to the remote instance
 .PHONY: tunnel
 tunnel:
-	nc -z localhost $(SSH_TUNNEL_PORT) || ssh $(SSH_OPTS) -D $(SSH_TUNNEL_PORT) -f -C -q -N $(EC2_INSTANCE_USER)@$(EC2_INSTANCE_HOST)
+	ssh $(SSH_OPTS) -D $(SSH_TUNNEL_PORT) -f -C -q -N $(EC2_INSTANCE_USER)@$(EC2_INSTANCE_HOST)
 
 .PHONY: dashboard
 dashboard: tunnel
