@@ -24,7 +24,7 @@ The local changes will be synchronized to the remote dev instance automatically.
 
 To copy the repo to the remote instance and start the watcher:
 ```shell
-make sync
+make sync-repo
 ```
 
 ### To connect with SSH
@@ -35,6 +35,15 @@ make connect
 To install Kommander and Insights backend, run:
 ```
 ./boostrap.sh
+```
+
+### Open Kommander dashboard
+it is possible to access Kommander Dashboard from the local browser via SSH tunnel and SOCKS proxy. 
+Configure SOCKS proxy in the network settings (the default port is 1337) and then run the following target to obtain 
+the credentials and open Kommander UI:
+
+```shell
+make dashboard
 ```
 
 ## Destroy and cleanup
