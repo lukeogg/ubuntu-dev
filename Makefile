@@ -12,6 +12,8 @@ SSH_OPTS := -i $(EC2_SSH_KEY) -o IdentitiesOnly=yes -o StrictHostKeyChecking=acc
 RSYNC_OPTS := -rav --exclude '.idea' --exclude '.local' -e "ssh $(SSH_OPTS)" $(TARGET_REPO) $(EC2_INSTANCE_USER)@$(EC2_INSTANCE_HOST):~/go/src/github.com/mesosphere
 SSH_TUNNEL_PORT := 1337
 
+PORT_FORWARD ?= 8888
+
 # Start one-way synchronization of the $(TARGET_REPO) to the remote host
 .PHONY: sync-repo
 sync-repo:
@@ -55,3 +57,7 @@ destroy:
 .PHONY: clean
 clean:
 	rm -rf .terraform* *.pem terraform.tfstate*
+
+.PHONY: port-forward
+port-forward:
+	ssh $(SSH_OPTS) -N -L $(PORT_FORWARD):localhost:$(PORT_FORWARD) $(EC2_INSTANCE_USER)@$(EC2_INSTANCE_HOST)
