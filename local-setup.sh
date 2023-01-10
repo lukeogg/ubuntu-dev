@@ -51,9 +51,9 @@ ssh -i $cert_path ubuntu@$host 'mkdir -p ~/go/src/github.com/mesosphere && cd ~/
 scp -i $cert_path ~/.gitconfig ubuntu@$host:~/.gitconfig
 
 # set .env
-echo DOCKER_USERNAME=${DOCKER_USERNAME} >> bashrc
-echo DOCKER_PASSWORD=${DOCKER_PASSWORD} >> bashrc
-echo GITHUB_TOKEN=${GITHUB_TOKEN} >> bashrc
+echo export DOCKER_USERNAME=${DOCKER_USERNAME} >> bashrc
+echo export DOCKER_PASSWORD=${DOCKER_PASSWORD} >> bashrc
+echo export GITHUB_TOKEN=${GITHUB_TOKEN} >> bashrc
 
 # set .bashrc
 scp -i $cert_path bashrc ubuntu@$host:~/bashrc
