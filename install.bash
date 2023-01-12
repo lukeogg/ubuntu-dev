@@ -41,6 +41,9 @@ apt-get install -y \
   docker-ce-cli \
   containerd.io
 
+# pip install
+pip install pre-commit #for kommander
+
 usermod -aG docker ubuntu
 
 # k8s
