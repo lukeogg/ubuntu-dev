@@ -16,3 +16,4 @@ echo $host > hostname
 
 ssh -i $cert_path -R 8080:"$1":443 -N -f ubuntu@$host
 ssh -i $cert_path -D 1337 -q -C -N -f ubuntu@$host
+# ssh -i $cert_path -o IdentitiesOnly=yes -o StrictHostKeyChecking=accept-new -o ServerAliveInterval=3600 -N -L 8888:localhost:8888 ubuntu@$host

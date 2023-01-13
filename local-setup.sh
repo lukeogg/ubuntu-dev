@@ -43,12 +43,7 @@ echo Checkout the repo
 
 ssh -i $cert_path ubuntu@$host 'mkdir -p ~/go/src/github.com/mesosphere && cd ~/go/src/github.com/mesosphere && eval "$(ssh-agent)" && ssh-add ~/.ssh/'$github_cert_file' && git clone --recursive 'git@github.com:mesosphere/dkp-insights.git
 scp -i $cert_path repo-setup.sh ubuntu@$host:~/go/src/github.com/mesosphere/dkp-insights
-
-
-# set .env
-echo DOCKER_USERNAME=${DOCKER_USERNAME} >> bashrc
-echo DOCKER_PASSWORD=${DOCKER_PASSWORD} >> bashrc
-echo GITHUB_TOKEN=${GITHUB_TOKEN} >> bashrc
+scp -i $cert_path setup-kind.sh ubuntu@$host:~/go/src/github.com/mesosphere/dkp-insights
 
 # set .bashrc
 scp -i $cert_path bashrc ubuntu@$host:~/bashrc
