@@ -9,4 +9,3 @@ kubectl wait --for=condition=Available deployments -n metallb-system --all --tim
 kubectl apply --server-side -f artifacts/metallb-config.yaml
 make kind-install-kommander
 kubectl delete helmrelease dkp-insights-management -n kommander
-
