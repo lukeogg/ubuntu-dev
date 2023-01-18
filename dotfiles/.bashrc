@@ -116,6 +116,11 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# Aliases
+alias k=kubectl
+
+
+# Insights env setup
 export GOPATH="$HOME/go"
 export IR=${GOPATH}/src/github.com/mesosphere/dkp-insights
 
