@@ -133,6 +133,8 @@ export PATH=${IR}/.local/tools:${PATH}
 export TAG_OWNER=$(whoami)
 export TAG_EXPIRATION=24h
 
-export GITHUB_TOKEN=<github token>
-export DOCKER_USERNAME=<docker user>
-export DOCKER_PASSWORD="<docker password>"
+export BACKEND_KUBECONFIG=${IR}/artifacts/backend.kubeconfig
+export MANAGEMENT_KUBECONFIG=${IR}/artifacts/management.kubeconfig
+export USE_KIND_CLUSTERS=true
+export INSIGHTS_NAMESPACE=kommander
+export SKIP_AWS_CREDENTIALS=true
