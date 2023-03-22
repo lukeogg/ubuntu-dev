@@ -18,4 +18,5 @@ cd "${IR}"
 ./hack/create-environments/create-environments.sh install-kommander
 
 # Install Insights Snapshot
+./hack/create-environments/create-environments.sh install-insights-management
 ./hack/create-environments/create-environments.sh install-insights-backend
