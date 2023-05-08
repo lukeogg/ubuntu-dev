@@ -61,3 +61,6 @@ clean:
 .PHONY: port-forward
 port-forward:
 	ssh $(SSH_OPTS) -N -L $(PORT_FORWARD):localhost:$(PORT_FORWARD) $(EC2_INSTANCE_USER)@$(EC2_INSTANCE_HOST)
+
+copy-certs:
+	scp $(SSH_OPTS) ~/.ssh/linux_cloud_dev_ed25519 $(EC2_INSTANCE_USER)@$(EC2_INSTANCE_HOST):~/.ssh/
