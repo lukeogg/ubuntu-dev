@@ -82,3 +82,8 @@ rm k9s_Linux_x86_64.tar.gz
 
 mkdir -p /home/ubuntu/go/src/github.com/mesosphere
 chown -R ubuntu:ubuntu go
+
+
+# Fix pod errors due to “too many open files” (https://kind.sigs.k8s.io/docs/user/known-issues/#pod-errors-due-to-too-many-open-files)
+sysctl fs.inotify.max_user_watches=524288
+sysctl fs.inotify.max_user_instances=512
