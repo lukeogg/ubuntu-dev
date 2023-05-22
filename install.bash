@@ -92,6 +92,9 @@ rm kuttl_0.15.0_linux_x86_64.tar.gz
 # GH CLI
 snap install gh
 
+# asdf
+git clone https://github.com/asdf-vm/asdf.git /home/ubuntu/.asdf --branch v0.11.3
+
 # Fix pod errors due to “too many open files” (https://kind.sigs.k8s.io/docs/user/known-issues/#pod-errors-due-to-too-many-open-files)
 sysctl fs.inotify.max_user_watches=524288
 sysctl fs.inotify.max_user_instances=512

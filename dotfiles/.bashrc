@@ -116,6 +116,9 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# asdf
+. "$HOME/.asdf/asdf.sh"
+
 # Aliases
 alias k=kubectl
 
