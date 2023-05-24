@@ -94,6 +94,7 @@ snap install gh
 
 # asdf
 git clone https://github.com/asdf-vm/asdf.git /home/ubuntu/.asdf --branch v0.11.3
+sudo chown -R ubuntu:ubuntu ~/.asdf
 
 # Fix pod errors due to “too many open files” (https://kind.sigs.k8s.io/docs/user/known-issues/#pod-errors-due-to-too-many-open-files)
 sysctl fs.inotify.max_user_watches=524288
