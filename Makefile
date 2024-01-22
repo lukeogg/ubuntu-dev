@@ -1,5 +1,5 @@
 TARGET_REPO := $(GOPATH)/src/github.com/mesosphere/dkp-insights
-TERRAFORM_OPTS := -var owner=$(shell whoami) -auto-approve
+TOFU_OPTS := -var owner=$(shell whoami) -auto-approve
 EC2_INSTANCE_USER := ubuntu
 
 ifneq ("$(wildcard $(CURDIR)/inventory)","")
@@ -43,16 +43,16 @@ dashboard:
 connect:
 	ssh $(SSH_OPTS) $(EC2_INSTANCE_USER)@$(EC2_INSTANCE_HOST)
 
-# Create an EC2 instance with Terraform
+# Create an EC2 instance with tofu
 .PHONY: create
 create:
-	terraform init
-	terraform apply $(TERRAFORM_OPTS)
+	tofu init
+	tofu apply $(TOFU_OPTS)
 
 # Destroy an EC2 instance
 .PHONY: destroy
 destroy:
-	terraform destroy $(TERRAFORM_OPTS)
+	tofu destroy $(TOFU_OPTS)
 
 .PHONY: clean
 clean:
