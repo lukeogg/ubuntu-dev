@@ -60,9 +60,9 @@ chmod +x ./kind
 sudo mv ./kind /usr/local/bin/kind
 
 # GoLang
-wget https://dl.google.com/go/go1.19.3.linux-amd64.tar.gz
-sudo tar -C /usr/local/ -xzf go1.19.3.linux-amd64.tar.gz
-rm go1.19.3.linux-amd64.tar.gz
+wget https://dl.google.com/go/go1.20.13.linux-amd64.tar.gz
+sudo tar -C /usr/local/ -xzf go1.20.13.linux-amd64.tar.gz
+rm go1.20.13.linux-amd64.tar.gz
 
 # Helm
 curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
