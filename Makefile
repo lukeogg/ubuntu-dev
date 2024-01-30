@@ -1,4 +1,4 @@
-TARGET_REPO := $(GOPATH)/src/github.com/mesosphere/dkp-insights
+TARGET_REPO ?= /Users/luke.ogg/Projects/ai-navigator-cluster-info-agent
 TOFU_OPTS := -var owner=$(shell whoami) -auto-approve
 EC2_INSTANCE_USER := ubuntu
 
