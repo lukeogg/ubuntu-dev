@@ -2,7 +2,7 @@
 
 ## Prerequisites 
 
-- Terraform v0.13.7. Use [tfenv](https://github.com/tfutils/tfenv) for installation. If you're working with an M1 Mac laptop, try installing Terraform v1.0.11.
+- Latest [OpenTofu](https://opentofu.org/). Use `brew` for [installation](https://opentofu.org/docs/intro/install/homebrew/). Or standalone [installer](https://opentofu.org/docs/intro/install/standalone/).
 - rsync
 - fswatch
 - Set the `login` and `password` in the [.netrc](dotfiles/.netrc) file with your Github user and token
