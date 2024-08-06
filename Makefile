@@ -1,15 +1,15 @@
 TARGET_REPO ?= /Users/luke.ogg/Projects/ai-navigator-cluster-info-agent
 TOFU_OPTS := -var owner=$(shell whoami) -auto-approve
-EC2_INSTANCE_USER := ubuntu
+EC2_INSTANCE_USER ?= ubuntu
 
 ifneq ("$(wildcard $(CURDIR)/inventory)","")
-EC2_INSTANCE_HOST := $(strip $(shell cat inventory | grep -E "(.*)amazonaws\.com"))
-EC2_SSH_KEY := $(shell cat inventory | grep -E ".*\.pem" | cut -d "=" -f 2)
+EC2_INSTANCE_HOST ?= $(strip $(shell cat inventory | grep -E "(.*)amazonaws\.com"))
+EC2_SSH_KEY ?= $(shell cat inventory | grep -E ".*\.pem" | cut -d "=" -f 2)
 endif
 
 SSH_OPTS := -i $(EC2_SSH_KEY) -o IdentitiesOnly=yes -o StrictHostKeyChecking=accept-new -o ServerAliveInterval=3600
 
-RSYNC_OPTS := -rav --delete --exclude .idea --exclude .local --exclude artifacts --exclude pkg/generated -e "ssh $(SSH_OPTS)" $(TARGET_REPO) $(EC2_INSTANCE_USER)@$(EC2_INSTANCE_HOST):~/go/src/github.com/mesosphere
+RSYNC_OPTS := -rav --delete --exclude .idea --exclude .local --exclude artifacts --exclude pkg/generated --exclude bin -e "ssh $(SSH_OPTS)" $(TARGET_REPO) $(EC2_INSTANCE_USER)@$(EC2_INSTANCE_HOST):~/go/src/github.com/mesosphere
 SSH_TUNNEL_PORT := 1337
 
 PORT_FORWARD ?= 8888
